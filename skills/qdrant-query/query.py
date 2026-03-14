@@ -138,10 +138,45 @@ def collection_info(collection: str = None) -> str:
         return f"Error: {e}"
 
 
+def index_text(text: str, collection: str = None) -> str:
+    """Add text to a collection."""
+    coll = collection or QDRANT_COLLECTION
+    
+    # Get embedding for text
+    vector = get_embedding(text)
+    if not vector:
+        return "Error: Could not generate embedding."
+    
+    import time
+    import uuid
+    
+    point_id = str(uuid.uuid4())
+    url = f"{BASE_URL}/collections/{coll}/points"
+    payload = {
+        "points": [{
+            "id": point_id,
+            "vector": vector,
+            "payload": {
+                "text": text,
+                "source": "agent",
+                "timestamp": time.time()
+            }
+        }]
+    }
+    
+    try:
+        resp = requests.put(url, json=payload, headers=HEADERS, timeout=30)
+        resp.raise_for_status()
+        return f"Indexed: {text[:50]}... (ID: {point_id})"
+    
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+
 def main():
     parser = argparse.ArgumentParser(description="Qdrant Query Skill")
-    parser.add_argument("command", choices=["search", "list", "info"], help="Command to run")
-    parser.add_argument("query", nargs="?", help="Search query or collection name")
+    parser.add_argument("command", choices=["search", "list", "info", "index"], help="Command to run")
+    parser.add_argument("query", nargs="?", help="Search query, text to index, or collection name")
     parser.add_argument("--collection", "-c", help="Collection name")
     parser.add_argument("--limit", "-l", type=int, default=5, help="Max results")
     
@@ -158,6 +193,12 @@ def main():
     
     elif args.command == "info":
         print(collection_info(args.collection))
+    
+    elif args.command == "index":
+        if not args.query:
+            print("Error: index requires text to add")
+            sys.exit(1)
+        print(index_text(args.query, args.collection))
 
 
 if __name__ == "__main__":
