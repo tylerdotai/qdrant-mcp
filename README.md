@@ -7,7 +7,7 @@ An MCP (Model Context Protocol) server for Qdrant vector database. Enables AI ag
 - Query Qdrant collections via natural language
 - List available collections
 - Get collection info
-- Semantic similarity search using Ollama embeddings
+- Semantic similarity search using Ollama embeddings (CPU mode)
 
 ## Installation
 
@@ -30,27 +30,47 @@ export OLLAMA_HOST="192.168.0.247"
 export OLLAMA_PORT="11434"
 ```
 
-## Prerequisites
+## Titan Setup
 
-### Start Ollama on Titan (for embeddings)
+### llama-server (GPU) - Running on ports 8402/8403
+
+The Strix Halo runs llama-server in a Docker container:
 
 ```bash
-ssh root@192.168.0.247
-systemctl start ollama
+# In llama-box container:
+llama-server -m /models/Qwen3.5-35B-A3B-Q4_K_M.gguf -c 8192 -ngl 999 -fa 1 --no-mmap --host 0.0.0.0 --port 8402
+llama-server -m /models/Qwen3-14B-Q4_K_M.gguf -c 8192 -ngl 999 -fa 1 --no-mmap --host 0.0.0.0 --port 8403
 ```
 
-Make sure Ollama is listening on all interfaces (edit `/etc/systemd/system/ollama.service.d/override.conf`):
+**Important flags for Strix Halo:**
+- `-fa 1` - Flash attention (required)
+- `--no-mmap` - Avoids crashes/slowdowns
+- `-ngl 999` - All layers on GPU
 
-```ini
+### Ollama (CPU) - For Embeddings
+
+Ollama runs on the host (not in container) in CPU mode due to ROCm issues:
+
+```bash
+# On Titan (192.168.0.247):
+# Edit /etc/systemd/system/ollama.service.d/override.conf:
 [Service]
-Environment=OLLAMA_HOST=0.0.0.0:11434
 Environment=OLLAMA_MODELS=/mnt/filestore/ollama_models
+Environment=OLLAMA_HOST=0.0.0.0:11434
+Environment=CUDA_VISIBLE_DEVICES=-1  # CPU mode - ROCm has issues with embeddings
+
+systemctl daemon-reload && systemctl restart ollama
 ```
 
-## Running the MCP Server
+**Note:** GPU mode crashes on ROCm due to a known llama.cpp bug with embedding models. CPU mode works but is slower. This is a llama.cpp/ROCm issue, not a setup issue.
+
+### Qdrant
+
+Qdrant runs on the host:
 
 ```bash
-python server.py
+# On Titan:
+qdrant --config-path /home/anon/qdrant/config/config.yaml
 ```
 
 ## Using the Skill
@@ -95,3 +115,7 @@ python skills/qdrant-query/query.py info hydra-rag
 ## Usage with Claude/OpenClaw
 
 Add to your mcporter config or use directly via the server.
+
+## Known Issues
+
+- **Ollama embeddings on GPU**: llama.cpp embedding binary crashes on ROCm 7.x due to a compiler regression. Running in CPU mode (`CUDA_VISIBLE_DEVICES=-1`) works around this. See: https://github.com/kyuz0/amd-strix-halo-toolboxes/issues/45
