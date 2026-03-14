@@ -37,7 +37,7 @@ def get_embedding(text: str) -> list:
     
     If embeddings fail, you can also provide pre-computed vectors directly.
     """
-    models = ["nomic-embed-text", "mxbai-embed-large:latest"]
+    models = ["mxbai-embed-large:latest", "nomic-embed-text"]
     
     for model in models:
         try:
