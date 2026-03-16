@@ -1,4 +1,4 @@
-<a name="readme-top"></a>
+</a>
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![GitHub][github-shield]][github-url]
@@ -7,7 +7,6 @@
 <br />
 <div align="center">
   <a href="https://codeberg.org/tylerdotai/qdrant-mcp">
-    <img src="https://codeberg.org/tylerdotai/tylerdotai/raw/branch/main/IMG_7177.png" alt="Logo" width="80" height="80">
   <h3 align="center">qdrant-mcp</h3>
   </a>
   <p align="center">
@@ -15,18 +14,18 @@
   </p>
 </div>
 
-## 👋 About
+## About
 
 An MCP (Model Context Protocol) server for Qdrant vector database. Enables AI agents to perform semantic search against your private knowledge base.
 
-## ⚡ Features
+## Features
 
 - Query Qdrant collections via natural language
 - Add/Index text to collections
 - List available collections
 - Semantic similarity search using Ollama embeddings
 
-## 📦 Installation
+## Installation
 
 ```bash
 git clone https://codeberg.org/tylerdotai/qdrant-mcp.git
