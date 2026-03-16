@@ -38,7 +38,7 @@ pip install -r requirements.txt
 *Building at the speed of vibes.*
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://https://www.https://www.linkedin.com/in/tyler-delano-60a35b1b1-60a35b1b1
+[linkedin-url]: https://www.linkedin.com/in/tyler-delano-60a35b1b1
 [github-shield]: https://img.shields.io/badge/-Codeberg-black.svg?style=for-the-badge&logo=codeberg&colorB=555
 [github-url]: https://codeberg.org/tylerdotai
 [twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
