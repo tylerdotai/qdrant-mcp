@@ -6,7 +6,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/tylerdotai/qdrant-mcp">
+  <a href="https://codeberg.org/tylerdotai/qdrant-mcp">
     <img src="https://codeberg.org/tylerdotai/tylerdotai/raw/branch/main/IMG_7177.png" alt="Logo" width="80" height="80">
   <h3 align="center">qdrant-mcp</h3>
   </a>
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/tylerdelano
-[github-shield]: https://img.shields.io/badge/-GitHub-black.svg?style=for-the-badge&logo=github&colorB=555
-[github-url]: https://github.com/tylerdotai
+[github-shield]: https://img.shields.io/badge/-Codeberg-black.svg?style=for-the-badge&logo=codeberg&colorB=555
+[github-url]: https://codeberg.org/tylerdotai
 [twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
 [twitter-url]: https://twitter.com/tylerdotai
