@@ -7,7 +7,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/tylerdotai/qdrant-mcp">
-    <h3 align="center">qdrant-mcp</h3>
+    <img src="https://codeberg.org/tylerdotai/tylerdotai/raw/branch/main/IMG_7177.png" alt="Logo" width="80" height="80">
+  <h3 align="center">qdrant-mcp</h3>
   </a>
   <p align="center">
     MCP server for Qdrant vector database
