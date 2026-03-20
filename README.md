@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/tyler-delano-60a35b1b1
-[github-shield]: https://img.shields.io/badge/-Codeberg-black.svg?style=for-the-badge&logo=codeberg&colorB=555
+[github-shield]: https://img.shields.io/badge/-GitHub-black.svg?style=for-the-badge&logo=github&colorB=555
 [github-url]: https://github.com/tylerdotai
 [twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
 [twitter-url]: https://twitter.com/tylerdotai
