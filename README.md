@@ -1,31 +1,58 @@
-</a>
+# Qdrant MCP
 
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![GitHub][github-shield]][github-url]
-[![Twitter][twitter-shield]][twitter-url]
+MCP server for querying Qdrant vector databases from AI agents through semantic search and collection inspection tools.
 
-<br />
-<div align="center">
-  <a href="https://github.com/tylerdotai/qdrant-mcp">
-  <h3 align="center">qdrant-mcp</h3>
-  </a>
-  <p align="center">
-    MCP server for Qdrant vector database
-  </p>
-</div>
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python)](#)
+[![Qdrant](https://img.shields.io/badge/Qdrant-vector%20db-red?style=flat-square)](#)
+
+## Live Demo
+
+- Repository: `https://github.com/tylerdotai/qdrant-mcp`
+- Main server entrypoint: `server.py`
 
 ## About
 
-An MCP (Model Context Protocol) server for Qdrant vector database. Enables AI agents to perform semantic search against your private knowledge base.
+Qdrant MCP exposes a small set of Model Context Protocol tools for semantic retrieval against a Qdrant instance. It is designed for local or self-hosted agent setups that need collection introspection and text-based search over a private vector knowledge base.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Runtime | Python |
+| Protocol | MCP |
+| Vector Store | Qdrant |
+| Transport | stdio MCP server |
 
 ## Features
 
-- Query Qdrant collections via natural language
-- Add/Index text to collections
+### MCP Tools
+- Semantic search against a configured Qdrant collection
 - List available collections
-- Semantic similarity search using Ollama embeddings
+- Inspect collection metadata and counts
 
-## Installation
+### Repo Surface
+- MCP server implementation in `server.py`
+- Example skill under `skills/qdrant-query/`
+- Environment-based Qdrant configuration
+
+## Project Structure
+
+```text
+server.py                    MCP server for Qdrant access
+requirements.txt             Python dependencies
+skills/qdrant-query/         Example related skill assets
+README.md                    Repository overview
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10+
+- A running Qdrant instance
+- `pip`
+
+### Installation
 
 ```bash
 git clone https://github.com/tylerdotai/qdrant-mcp.git
@@ -33,13 +60,32 @@ cd qdrant-mcp
 pip install -r requirements.txt
 ```
 
----
+## Deployment
 
-*Building at the speed of vibes.*
+Qdrant MCP is designed for local or self-hosted agent environments.
 
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/tyler-delano-60a35b1b1
-[github-shield]: https://img.shields.io/badge/-GitHub-black.svg?style=for-the-badge&logo=github&colorB=555
-[github-url]: https://github.com/tylerdotai
-[twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
-[twitter-url]: https://twitter.com/tylerdotai
+- Repository: `https://github.com/tylerdotai/qdrant-mcp`
+
+## Usage
+
+```bash
+python server.py
+```
+
+Configure with environment variables such as `QDRANT_HOST`, `QDRANT_PORT`, `QDRANT_API_KEY`, and `QDRANT_COLLECTION`.
+
+## Current Limitations
+
+- Tool surface is intentionally small today
+- Query behavior assumes a Qdrant setup compatible with `query_text` search flow
+- The repo is focused on MCP server logic rather than broader deployment packaging
+
+## Roadmap
+
+- Add more collection management and indexing tools
+- Improve setup docs for common local agent environments
+- Expand examples showing how agents should consume the MCP server
+
+## License
+
+No license has been added yet.
